@@ -18,7 +18,7 @@ Key facts:
 
 ## Code
 
-- [Source repository](https://github.com/typenx/efail): the engine, templates and example games
+- [Source repository](https://github.com/typenx/efail): the engine, templates and example games (temporarily private while the next version is built)
 - [Bend language](https://github.com/bendlang/bend): the language Efail and its games are written in
 
 ## Optional

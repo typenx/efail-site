@@ -57,9 +57,16 @@
       "programmingLanguage": "Bend",
       "license": "https://opensource.org/licenses/MIT",
       "isAccessibleForFree": true,
-      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
       "codeRepository": "https://github.com/typenx/efail",
-      "softwareHelp": { "@type": "CreativeWork", "url": "__SITE_URL__/docs/2d.md" },
+      "softwareHelp": {
+        "@type": "CreativeWork",
+        "url": "__SITE_URL__/docs/2d.md"
+      },
       "screenshot": [
         "__SITE_URL__/img/dodge-film.png",
         "__SITE_URL__/img/runner3d.png"
@@ -73,7 +80,8 @@
         "Low-poly 3D rendering, cameras and basic physics",
         "Export to a single self-contained web page",
         "Retro sound described as data and checked as text"
-      ]
+      ],
+      "keywords": "game engine for AI agents, agent-native game engine, deterministic game engine, headless game engine, AI coding agents, Claude Code, Codex, Bend, 2D game engine, low-poly 3D"
     },
     {
       "@type": "FAQPage",
@@ -82,47 +90,122 @@
         {
           "@type": "Question",
           "name": "What is Efail?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Efail is a deterministic 2D and low-poly 3D game engine built for AI agents, written in the Bend programming language. A game is one file, game.bend, made of pure functions (init, step, draw and show). Efail handles the window, the clock, input, replays, screenshots and headless runs." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Efail is a deterministic 2D and low-poly 3D game engine built for AI agents, written in the Bend programming language. A game is one file, game.bend, made of pure functions (init, step, draw and show). Efail handles the window, the clock, input, replays, screenshots and headless runs."
+          }
         },
         {
           "@type": "Question",
           "name": "Why is Efail a good game engine for AI coding agents?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Agents usually spend most of their effort on the layer around a game: choosing a stack, wiring a renderer and input, and finding a way to see and test what they made. Efail makes those choices up front. Everything an agent needs to check is text or a PNG, every run is deterministic, there is no editor GUI, and the whole 2D API fits in one page of docs (AGENTS.md)." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Agents usually spend most of their effort on the layer around a game: choosing a stack, wiring a renderer and input, and finding a way to see and test what they made. Efail makes those choices up front. Everything an agent needs to check is text or a PNG, every run is deterministic, there is no editor GUI, and the whole 2D API fits in one page of docs (AGENTS.md)."
+          }
         },
         {
           "@type": "Question",
           "name": "How does an AI agent test an Efail game without a screen?",
-          "acceptedAnswer": { "@type": "Answer", "text": "The agent writes a plain-text input file (a tick number followed by the keys held from that tick), then runs efail sim to print the game state as one line of text per sampled tick, efail shot to save a frame as a PNG, or efail film to save a labelled grid of frames in one PNG. The same seed and input always give the same states and the same pixels." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The agent writes a plain-text input file (a tick number followed by the keys held from that tick), then runs efail sim to print the game state as one line of text per sampled tick, efail shot to save a frame as a PNG, or efail film to save a labelled grid of frames in one PNG. The same seed and input always give the same states and the same pixels."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can Claude Code or Codex make a game with Efail?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Efail works with any coding agent that can run shell commands and read text files and images, including Claude Code and Codex. There is no plugin, MCP server or editor integration to set up: the agent reads AGENTS.md, edits game.bend and uses the same efail commands a person would."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is a deterministic game engine?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A deterministic game engine gives exactly the same result every time it is run with the same starting seed and the same input. In Efail that covers both the game state and the pixels on screen, which is why a recorded replay reproduces a bug exactly and why an agent can trust a test it ran once."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is a headless game engine?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A headless game engine can run a game without opening a window or needing a display. Efail runs any number of ticks headless with efail sim, printing the state as text, and renders screenshots with efail shot and efail film, so an agent on a server with no screen can build and check a whole game."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is Efail different from Unity, Godot or Unreal?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Those engines are built around a visual editor and aim at large commercial games. Efail has no editor: a game is one text file, every check is a command whose output is text or a PNG, and every run is deterministic. Efail aims at small 2D games and low-poly 3D games that an AI agent can write and verify on its own."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Efail an AI game generator?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Efail does not generate games and contains no AI model. It is the engine an AI coding agent writes a game for, designed so the agent can test and see its own work."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What kinds of games can you make with Efail?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Small 2D games such as arcade, puzzle, platform and mouse-driven games, drawn with shapes, a pixel font and text-art sprites with retro sound, and low-poly 3D games with cameras, flat lighting and basic physics."
+          }
         },
         {
           "@type": "Question",
           "name": "What language are Efail games written in?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Efail games are written in Bend, a Python-shaped, strictly typed functional language. The engine itself is also written in Bend. Game functions are pure: no IO, no clock and no randomness except what is derived from the seed." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Efail games are written in Bend, a Python-shaped, strictly typed functional language. The engine itself is also written in Bend. Game functions are pure: no IO, no clock and no randomness except what is derived from the seed."
+          }
         },
         {
           "@type": "Question",
           "name": "Does Efail support 3D games?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Yes. The efail3d command provides a low-poly 3D mode with colored triangle rendering, depth, clipping, transformed primitive meshes, flat lighting, cameras, deterministic gravity, box and sphere collision, raycasts, screenshots and exact replay. Textures, imported models, skeletal animation, shadows and rigid-body joints are outside the first 3D release." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The efail3d command provides a low-poly 3D mode with colored triangle rendering, depth, clipping, transformed primitive meshes, flat lighting, cameras, deterministic gravity, box and sphere collision, raycasts, screenshots and exact replay. Textures, imported models, skeletal animation, shadows and rigid-body joints are outside the first 3D release."
+          }
         },
         {
           "@type": "Question",
           "name": "Can Efail games run in a web browser?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Yes, for 2D games. efail web writes build/game.html, one self-contained file that runs the game's own functions compiled to JavaScript, with the same 60 ticks a second, keys, pixels and sounds as the native window. Its Save replay button downloads a replay that efail sim can rerun headless." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, for 2D games. efail web writes build/game.html, one self-contained file that runs the game's own functions compiled to JavaScript, with the same 60 ticks a second, keys, pixels and sounds as the native window. Its Save replay button downloads a replay that efail sim can rerun headless."
+          }
         },
         {
           "@type": "Question",
           "name": "What platforms does Efail run on?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Efail is at v0 and runs on Linux (X11 or XWayland). Headless commands such as efail sim and efail shot need no display. 2D games can also be exported to a single web page that runs in any modern browser." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Efail is at v0 and runs on Linux (X11 or XWayland). Headless commands such as efail sim and efail shot need no display. 2D games can also be exported to a single web page that runs in any modern browser."
+          }
         },
         {
           "@type": "Question",
           "name": "Is Efail free and open source?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Efail is free and released under the MIT license." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Efail is free and released under the MIT license."
+          }
         },
         {
           "@type": "Question",
           "name": "How do you pronounce Efail and what does it mean?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Efail is Welsh for smithy and is said EV-ile." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Efail is Welsh for smithy and is said EV-ile."
+          }
         }
       ]
     }
@@ -202,6 +285,10 @@ table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 15.
 th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
 th { font: 600 13px var(--mono); color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
 td:first-child { white-space: nowrap; }
+.vs td:first-child { font-weight: 600; white-space: normal; }
+.vs td:nth-child(2) { color: var(--muted); }
+dl.terms dt { font: 600 17px var(--mono); color: var(--ember-2); margin-top: 20px; }
+dl.terms dd { margin: 6px 0 0; color: var(--muted); max-width: 52em; }
 .tablewrap { overflow-x: auto; }
 
 .play { margin-top: 24px; border: 1px solid var(--line); background: #07101a; }
@@ -256,8 +343,13 @@ footer ul { list-style: none; padding: 0; margin: 0 0 16px; display: flex; gap: 
   tr { background: var(--panel); border: 1px solid var(--line); padding: 12px 14px; margin-bottom: 10px; }
   td { border: 0; padding: 0; }
   td:first-child { margin-bottom: 6px; font-size: 16px; }
-  td:nth-child(3) { color: var(--muted); font-size: 14.5px; margin-top: 4px; }
-  td:nth-child(3)::before { content: "Output: "; font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .08em; }
+  .cmds td:nth-child(3) { color: var(--muted); font-size: 14.5px; margin-top: 4px; }
+  .vs td:nth-child(2) { color: var(--muted); margin-bottom: 6px; }
+  .vs td:nth-child(2)::before { content: "Editor-based engine: "; }
+  .vs td:nth-child(3)::before { content: "Efail: "; color: var(--green); }
+  .vs td:first-child { font-family: var(--mono); font-weight: 600; white-space: normal; }
+  .vs td::before { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .08em; }
+  .cmds td:nth-child(3)::before { content: "Output: "; font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .08em; }
 }
 @media (max-width: 359px) { nav .gh { display: none; } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
@@ -357,7 +449,7 @@ def show(s: State) -&gt; String:                  <span class="c"># one line for
     <h2 id="loop-h">The loop an agent works in</h2>
     <p class="lede">Edit, check, simulate, look. Every command is a one-liner whose output is text or a PNG.</p>
     <div class="tablewrap">
-    <table>
+    <table class="cmds">
       <thead><tr><th scope="col">Command</th><th scope="col">What it does</th><th scope="col">Output an agent reads</th></tr></thead>
       <tbody>
         <tr><td><code>efail check</code></td><td>Type-checks the game, checks the contract and proves its laws</td><td>Errors as text</td></tr>
@@ -460,6 +552,66 @@ law over_waits:
   </div>
 </section>
 
+<section id="agents" aria-labelledby="agents-h">
+  <div class="wrap">
+    <h2 id="agents-h">How an AI agent builds a game with Efail</h2>
+    <p class="lede">Efail works with any coding agent that can run shell commands and read text files and images,
+    including Claude Code and Codex. There is no plugin, MCP server or editor integration to set up:
+    the agent uses the same command line a person would.</p>
+    <ol class="steps">
+      <li><div><p><strong>Read one page.</strong> <code>AGENTS.md</code> holds the whole 2D contract, the API, the input-file format and the rules of the Bend language that matter. It is short enough to read in full before writing a line.</p></div></li>
+      <li><div><p><strong>Write the game.</strong> The agent edits <code>game.bend</code>: a state type and the pure functions <code>init</code>, <code>step</code>, <code>draw</code> and <code>show</code>.</p></div></li>
+      <li><div><p><strong>Check it.</strong> <code>efail check</code> type-checks the file, checks the contract and proves any laws. Errors come back as text the agent can act on.</p></div></li>
+      <li><div><p><strong>Play it without a screen.</strong> The agent writes a short input script (which keys go down on which tick), runs <code>efail sim</code>, and reads the state line by line: position, score, game over.</p></div></li>
+      <li><div><p><strong>Look at it.</strong> <code>efail shot</code> saves a frame and <code>efail film</code> saves a strip of frames as one PNG, so the agent can see layout, colors and motion for itself.</p></div></li>
+      <li><div><p><strong>Hand it to a person.</strong> <code>efail run</code> opens a window and records the session. If the player hits a bug, <code>efail replay</code> reproduces it exactly, with no bug report to interpret.</p></div></li>
+      <li><div><p><strong>Share it.</strong> <code>efail web</code> turns a 2D game into one HTML file that plays in any browser.</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<section id="compare" aria-labelledby="compare-h">
+  <div class="wrap">
+    <h2 id="compare-h">Efail compared with editor-based game engines</h2>
+    <p class="lede">Engines such as Unity, Godot and Unreal are built around a visual editor and aim at large commercial games.
+    Efail is not trying to replace them. It is a small, code-only engine for games an AI agent can write and verify on its own.</p>
+    <div class="tablewrap">
+    <table class="vs">
+      <thead><tr><th scope="col">&nbsp;</th><th scope="col">Editor-based engine</th><th scope="col">Efail</th></tr></thead>
+      <tbody>
+        <tr><td>Making a game</td><td>Scenes, assets and settings arranged in a visual editor</td><td>One text file of pure functions</td></tr>
+        <tr><td>Testing it</td><td>Usually a person plays it in a window</td><td>A command prints the state as text or saves a PNG, with no display needed</td></tr>
+        <tr><td>Reproducing a bug</td><td>Follow written steps and hope it happens again</td><td>Replay the recorded input: the same ticks, states and pixels</td></tr>
+        <tr><td>Same input, same result</td><td>Often depends on frame timing and the machine</td><td>Always, by design</td></tr>
+        <tr><td>Checking the rules</td><td>Tests that try some cases</td><td>Laws proven for every input</td></tr>
+        <tr><td>What to read first</td><td>A large manual and editor tutorials</td><td>One page per mode</td></tr>
+        <tr><td>Best suited to</td><td>Large 2D and 3D games made by teams</td><td>Small 2D games and low-poly 3D games made by agents</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<section id="terms" aria-labelledby="terms-h">
+  <div class="wrap">
+    <h2 id="terms-h">The ideas behind Efail</h2>
+    <dl class="terms">
+      <dt>Agent-native game engine</dt>
+      <dd>An engine designed for an AI agent as its main user. Every feature can be driven from the command line and checked as text or an image, because an agent cannot click through an editor or watch a window.</dd>
+      <dt>Deterministic</dt>
+      <dd>The same seed and the same input produce the same states and the same pixels on every run. Efail games are pure functions with no clock and no hidden randomness, so nothing can differ between runs.</dd>
+      <dt>Headless</dt>
+      <dd>Running without a window or a display. Efail simulates and renders on a server with no screen.</dd>
+      <dt>Replay</dt>
+      <dd>A plain-text record of which keys were held on which tick. Because the engine is deterministic, a replay is a complete, exact reproduction of a play session.</dd>
+      <dt>Law</dt>
+      <dd>A fact about a game's rules, written in Bend and proven by <code>efail check</code>, for example &ldquo;the game-over screen waits for Space&rdquo;.</dd>
+      <dt>Tick</dt>
+      <dd>One call to <code>step</code>. Efail runs 60 ticks a second, and every command counts time in ticks, not seconds.</dd>
+    </dl>
+  </div>
+</section>
+
 <section id="play" aria-labelledby="play-h">
   <div class="wrap">
     <h2 id="play-h">Play it here</h2>
@@ -482,6 +634,7 @@ law over_waits:
   <div class="wrap">
     <h2 id="qs-h">Quick start</h2>
     <p class="lede">Efail is at v0 and runs on Linux (X11 or XWayland). It needs Bend 2 and clang.</p>
+    <p class="agent-note" style="margin-top:0"><strong>Note:</strong> the source repository is temporarily private while the next version is built. It will be back; these steps apply once it is.</p>
     <ol class="steps">
       <li><div><p>Install Bend, then get Efail and put it on your path.</p>
 <pre><code>curl -fsSL https://bend-lang.com/install.sh | sh
@@ -513,6 +666,24 @@ efail3d shot --ticks 120</code></pre></div></li>
 
       <dt>How does an AI agent test an Efail game without a screen?</dt>
       <dd>The agent writes a plain-text input file (a tick number followed by the keys held from that tick), then runs <code>efail sim</code> to print the game state as one line of text per sampled tick, <code>efail shot</code> to save a frame as a PNG, or <code>efail film</code> to save a labelled grid of frames in one PNG. The same seed and input always give the same states and the same pixels.</dd>
+
+      <dt>Can Claude Code or Codex make a game with Efail?</dt>
+      <dd>Yes. Efail works with any coding agent that can run shell commands and read text files and images, including Claude Code and Codex. There is no plugin, MCP server or editor integration to set up: the agent reads <code>AGENTS.md</code>, edits <code>game.bend</code> and uses the same <code>efail</code> commands a person would.</dd>
+
+      <dt>What is a deterministic game engine?</dt>
+      <dd>A deterministic game engine gives exactly the same result every time it is run with the same starting seed and the same input. In Efail that covers both the game state and the pixels on screen, which is why a recorded replay reproduces a bug exactly and why an agent can trust a test it ran once.</dd>
+
+      <dt>What is a headless game engine?</dt>
+      <dd>A headless game engine can run a game without opening a window or needing a display. Efail runs any number of ticks headless with <code>efail sim</code>, printing the state as text, and renders screenshots with <code>efail shot</code> and <code>efail film</code>, so an agent on a server with no screen can build and check a whole game.</dd>
+
+      <dt>How is Efail different from Unity, Godot or Unreal?</dt>
+      <dd>Those engines are built around a visual editor and aim at large commercial games. Efail has no editor: a game is one text file, every check is a command whose output is text or a PNG, and every run is deterministic. Efail aims at small 2D games and low-poly 3D games that an AI agent can write and verify on its own.</dd>
+
+      <dt>Is Efail an AI game generator?</dt>
+      <dd>No. Efail does not generate games and contains no AI model. It is the engine an AI coding agent writes a game for, designed so the agent can test and see its own work.</dd>
+
+      <dt>What kinds of games can you make with Efail?</dt>
+      <dd>Small 2D games such as arcade, puzzle, platform and mouse-driven games, drawn with shapes, a pixel font and text-art sprites with retro sound, and low-poly 3D games with cameras, flat lighting and basic physics.</dd>
 
       <dt>What language are Efail games written in?</dt>
       <dd>Efail games are written in <a href="https://github.com/bendlang/bend" rel="noopener">Bend</a>, a Python-shaped, strictly typed functional language. The engine itself is also written in Bend. Game functions are pure: no IO, no clock and no randomness except what is derived from the seed.</dd>
