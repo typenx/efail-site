@@ -3,19 +3,14 @@
 //   - writes llms-full.txt (landing page + both guides in one file)
 //   - writes sitemap.xml
 //
-// The origin comes from SITE_URL, or from the domain Railway or Vercel
-// gives the project. With a custom domain, set SITE_URL=https://your-domain. `npm start`
-// runs this build first, so the address is read where the site runs.
+// Every copy of the site, wherever it is hosted, names this one address as
+// canonical. Set SITE_URL to override it (for example after adding a custom
+// domain).
 import fs from 'node:fs';
 import path from 'node:path';
 
-const env = process.env;
-const site = (
-  env.SITE_URL ||
-  (env.RAILWAY_PUBLIC_DOMAIN && `https://${env.RAILWAY_PUBLIC_DOMAIN}`) ||
-  (env.VERCEL_PROJECT_PRODUCTION_URL && `https://${env.VERCEL_PROJECT_PRODUCTION_URL}`) ||
-  'http://localhost:3000'
-).replace(/\/+$/, '');
+const CANONICAL = 'https://efail-site-production.up.railway.app';
+const site = (process.env.SITE_URL || CANONICAL).replace(/\/+$/, '');
 
 const src = 'src', out = 'dist';
 const TEXT = new Set(['.html', '.md', '.txt', '.xml', '.svg', '.json']);

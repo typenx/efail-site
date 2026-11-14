@@ -18,16 +18,14 @@ Connect the repo and generate a public domain for the service (Settings >
 Networking). `railway.json` sets the start command (`npm start`) and a
 health check; Railway supplies `PORT`.
 
-Canonical URLs, the sitemap, `robots.txt` and `llms.txt` need the site's
-public address. The build takes it from, in order:
-
-1. `SITE_URL` (set this variable in Railway once you have a custom domain,
-   for example `https://efail.dev`),
-2. `RAILWAY_PUBLIC_DOMAIN` (Railway sets this itself),
-3. `http://localhost:3000`.
+Canonical URLs, the sitemap, `robots.txt` and `llms.txt` carry the site's
+public address. It is the `CANONICAL` constant at the top of `build.mjs`
+(the Railway domain), so every copy of the site, on any host, points to the
+same one. To change it, edit the constant or set a `SITE_URL` variable (for
+example `https://efail.dev` once there is a custom domain).
 
 Any other host that runs Node works the same way: run `npm start` with
-`SITE_URL` and `PORT` set.
+`PORT` set.
 
 ## What is here
 
