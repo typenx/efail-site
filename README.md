@@ -45,6 +45,7 @@ server.mjs          serves dist/: headers, gzip, and Markdown for
                     `Accept: text/markdown` on /
 railway.json        the start command and health check for Railway
 tools/              how the images were made
+docs/future-notes.md  what is left to do later (not published)
 ```
 
 ## How it serves search engines
