@@ -1,0 +1,13 @@
+{
+  "name": "efail-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Landing page for Efail, the deterministic game engine built for AI agents",
+  "license": "MIT",
+  "type": "module",
+  "engines": { "node": ">=20.12" },
+  "scripts": {
+    "build": "node build.mjs",
+    "start": "node build.mjs && node server.mjs"
+  }
+}

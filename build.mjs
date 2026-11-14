@@ -3,15 +3,16 @@
 //   - writes llms-full.txt (landing page + both guides in one file)
 //   - writes sitemap.xml
 //
-// The origin comes from SITE_URL, or from Vercel's production domain, so a
-// custom domain needs no code change:  SITE_URL=https://example.com node build.mjs
+// The origin comes from SITE_URL, or from the domain Railway gives the
+// service. With a custom domain, set SITE_URL=https://your-domain. `npm start`
+// runs this build first, so the address is read where the site runs.
 import fs from 'node:fs';
 import path from 'node:path';
 
 const env = process.env;
 const site = (
   env.SITE_URL ||
-  (env.VERCEL_PROJECT_PRODUCTION_URL && `https://${env.VERCEL_PROJECT_PRODUCTION_URL}`) ||
+  (env.RAILWAY_PUBLIC_DOMAIN && `https://${env.RAILWAY_PUBLIC_DOMAIN}`) ||
   'http://localhost:3000'
 ).replace(/\/+$/, '');
 

@@ -4,26 +4,30 @@ The landing page for [Efail](https://github.com/typenx/efail), the deterministic
 game engine built for AI agents. A static site with no dependencies, made to
 be read equally well by people, search engines and AI agents.
 
-## Build and preview
+## Run it
 
 ```sh
-node build.mjs                      # src/ -> dist/
-npx serve dist                      # or: cd dist && python3 -m http.server
+npm start                           # builds src/ -> dist/, then serves it on PORT (3000)
 ```
 
-## Deploy on Vercel
+There are no dependencies to install. `npm run build` builds without serving.
 
-Import the repo. `vercel.json` already sets the build command
-(`node build.mjs`) and the output directory (`dist`); there is nothing to
-configure.
+## Deploy on Railway
+
+Connect the repo and generate a public domain for the service (Settings >
+Networking). `railway.json` sets the start command (`npm start`) and a
+health check; Railway supplies `PORT`.
 
 Canonical URLs, the sitemap, `robots.txt` and `llms.txt` need the site's
 public address. The build takes it from, in order:
 
-1. `SITE_URL` (set it in Vercel's environment variables once you have a
-   custom domain, for example `https://efail.dev`),
-2. `VERCEL_PROJECT_PRODUCTION_URL` (Vercel sets this itself),
+1. `SITE_URL` (set this variable in Railway once you have a custom domain,
+   for example `https://efail.dev`),
+2. `RAILWAY_PUBLIC_DOMAIN` (Railway sets this itself),
 3. `http://localhost:3000`.
+
+Any other host that runs Node works the same way: run `npm start` with
+`SITE_URL` and `PORT` set.
 
 ## What is here
 
@@ -37,7 +41,9 @@ src/play/dodge.html the Dodge example, built with `efail web`
 src/img/            screenshots made by `efail shot` and `efail film`
 src/robots.txt      allows search and AI crawlers, points to the sitemap
 build.mjs           fills in the site URL; writes llms-full.txt and sitemap.xml
-vercel.json         headers, and Markdown for `Accept: text/markdown` on /
+server.mjs          serves dist/: headers, gzip, and Markdown for
+                    `Accept: text/markdown` on /
+railway.json        the start command and health check for Railway
 tools/              how the images were made
 ```
 
