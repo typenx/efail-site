@@ -3,8 +3,8 @@
 //   - writes llms-full.txt (landing page + both guides in one file)
 //   - writes sitemap.xml
 //
-// The origin comes from SITE_URL, or from the domain Railway gives the
-// service. With a custom domain, set SITE_URL=https://your-domain. `npm start`
+// The origin comes from SITE_URL, or from the domain Railway or Vercel
+// gives the project. With a custom domain, set SITE_URL=https://your-domain. `npm start`
 // runs this build first, so the address is read where the site runs.
 import fs from 'node:fs';
 import path from 'node:path';
@@ -13,6 +13,7 @@ const env = process.env;
 const site = (
   env.SITE_URL ||
   (env.RAILWAY_PUBLIC_DOMAIN && `https://${env.RAILWAY_PUBLIC_DOMAIN}`) ||
+  (env.VERCEL_PROJECT_PRODUCTION_URL && `https://${env.VERCEL_PROJECT_PRODUCTION_URL}`) ||
   'http://localhost:3000'
 ).replace(/\/+$/, '');
 

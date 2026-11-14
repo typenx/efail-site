@@ -166,7 +166,7 @@ p { margin: 0 0 16px; }
 .lede strong { color: var(--text); font-weight: 600; }
 .kicker { font: 600 13px var(--mono); color: var(--ember); text-transform: uppercase; letter-spacing: .14em; margin-bottom: 14px; }
 
-.hero { padding: 72px 0 56px; }
+.hero { padding-block: 72px 56px; }
 .hero h1 { max-width: 15em; margin-bottom: 22px; }
 .cta { display: flex; gap: 12px; flex-wrap: wrap; margin: 28px 0 0; }
 .btn { display: inline-block; padding: 12px 20px; font: 600 15px var(--mono); text-decoration: none; border: 2px solid var(--ember); color: var(--ember-2); }
@@ -177,8 +177,8 @@ p { margin: 0 0 16px; }
 .agent-note strong { color: var(--green); }
 
 section { padding: 64px 0; border-top: 1px solid var(--line); }
-.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; align-items: start; }
-.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-top: 28px; padding: 0; list-style: none; }
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 28px; align-items: start; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr)); gap: 16px; margin-top: 28px; padding: 0; list-style: none; }
 .cards li { background: var(--panel); border: 1px solid var(--line); padding: 20px; }
 .cards p { color: var(--muted); margin: 0; font-size: 15.5px; }
 .cards h3 { color: var(--ember-2); }
@@ -186,12 +186,17 @@ section { padding: 64px 0; border-top: 1px solid var(--line); }
 pre { margin: 0; background: #07101a; border: 1px solid var(--line); padding: 16px 18px; overflow-x: auto; font: 14px/1.6 var(--mono); color: #d5dee8; tab-size: 2; }
 code { font-family: var(--mono); font-size: .92em; }
 p code, li code, dd code, td code { background: var(--panel); border: 1px solid var(--line); padding: 1px 5px; }
+pre code { background: none; border: 0; padding: 0; font-size: inherit; }
 pre .c { color: #6f8399; }
 pre .o { color: var(--green); }
 figure { margin: 0; }
+.cols > *, .cards > *, .shots > * { min-width: 0; }
+body { overflow-wrap: break-word; }
+.scrollx { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.swipe { display: none; }
 figcaption { color: var(--muted); font-size: 14px; margin-top: 8px; }
 .px { image-rendering: pixelated; image-rendering: crisp-edges; display: block; width: 100%; height: auto; border: 1px solid var(--line); background: #0f1e2e; }
-.shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 24px; }
+.shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 16px; margin-top: 24px; }
 
 table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 15.5px; }
 th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
@@ -201,9 +206,15 @@ td:first-child { white-space: nowrap; }
 
 .play { margin-top: 24px; border: 1px solid var(--line); background: #07101a; }
 .play iframe { display: block; width: 100%; height: 620px; border: 0; }
+.pad { display: none; gap: 10px; padding: 12px; border-top: 1px solid var(--line); }
+.pad button { flex: 1; min-height: 56px; font: 700 18px var(--mono); color: var(--text); background: var(--panel); border: 2px solid var(--line); border-radius: 0; touch-action: none; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent; }
+.pad button.on { background: var(--ember); border-color: var(--ember); color: #14100a; }
+.pad .wide { flex: 1.6; }
+.touch-hint { display: none; }
+@media (pointer: coarse) { .pad { display: flex; } .keys-hint { display: none; } .touch-hint { display: inline; } }
 
 .steps { counter-reset: s; list-style: none; padding: 0; margin: 24px 0 0; display: grid; gap: 14px; }
-.steps li { counter-increment: s; display: grid; grid-template-columns: 44px 1fr; gap: 14px; align-items: start; }
+.steps li { counter-increment: s; display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 14px; align-items: start; }
 .steps li::before { content: counter(s); font: 700 18px var(--mono); color: #14100a; background: var(--ember); width: 36px; height: 36px; display: grid; place-items: center; }
 .steps p { margin: 0 0 8px; }
 
@@ -213,8 +224,42 @@ dl.faq dd { margin: 8px 0 0; color: var(--muted); max-width: 52em; }
 
 footer { border-top: 1px solid var(--line); padding: 36px 0 56px; color: var(--muted); font-size: 15px; }
 footer ul { list-style: none; padding: 0; margin: 0 0 16px; display: flex; gap: 20px; flex-wrap: wrap; }
-@media (max-width: 700px) { .play iframe { height: 420px; } }
-@media (max-width: 560px) { .hero { padding: 44px 0 36px; } section { padding: 44px 0; } nav ul { gap: 14px; } }
+@media (max-width: 700px) {
+  body { font-size: 16px; }
+  header.top .wrap { flex-wrap: nowrap; min-height: 54px; }
+  nav { overflow-x: auto; scrollbar-width: none; }
+  nav::-webkit-scrollbar { display: none; }
+  nav ul { flex-wrap: nowrap; white-space: nowrap; gap: 16px; }
+  nav .opt { display: none; }
+  .hero { padding-block: 36px 32px; }
+  .hero h1 { margin-bottom: 16px; }
+  .kicker { font-size: 11px; letter-spacing: .08em; }
+  .lede { font-size: 17px; }
+  .cta { margin-top: 22px; gap: 10px; }
+  .cta .btn { flex: 1 1 100%; text-align: center; }
+  .agent-note { margin-top: 24px; font-size: 13px; padding: 12px 14px; }
+  section { padding: 40px 0; }
+  .cards { gap: 10px; margin-top: 20px; }
+  .cards li { padding: 14px 16px; }
+  .cards p { font-size: 15px; }
+  pre { font-size: 12.5px; padding: 12px 14px; }
+  .play iframe { height: 404px; }
+  .shots { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .shots figcaption { font-size: 13px; }
+  .scrollx img { width: 760px; max-width: none; }
+  .swipe { display: inline; }
+  dl.faq dt { font-size: 16.5px; margin-top: 22px; }
+  footer ul { gap: 10px 18px; }
+  /* the command table becomes a list of cards */
+  table, tbody, tr, td { display: block; }
+  thead { position: absolute; left: -9999px; }
+  tr { background: var(--panel); border: 1px solid var(--line); padding: 12px 14px; margin-bottom: 10px; }
+  td { border: 0; padding: 0; }
+  td:first-child { margin-bottom: 6px; font-size: 16px; }
+  td:nth-child(3) { color: var(--muted); font-size: 14.5px; margin-top: 4px; }
+  td:nth-child(3)::before { content: "Output: "; font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .08em; }
+}
+@media (max-width: 359px) { nav .gh { display: none; } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 </style>
 </head>
@@ -229,13 +274,13 @@ footer ul { list-style: none; padding: 0; margin: 0 0 16px; display: flex; gap: 
     </a>
     <nav aria-label="Main">
       <ul>
-        <li><a href="#how">How it works</a></li>
-        <li><a href="#loop">The agent loop</a></li>
-        <li><a href="#play">Play</a></li>
+        <li class="opt"><a href="#how">How it works</a></li>
+        <li class="opt"><a href="#loop">The agent loop</a></li>
+        <li class="opt"><a href="#play">Play</a></li>
         <li><a href="#quickstart">Quick start</a></li>
-        <li><a href="#faq">FAQ</a></li>
+        <li class="opt"><a href="#faq">FAQ</a></li>
         <li><a href="/docs/2d.md">Docs</a></li>
-        <li><a href="https://github.com/typenx/efail" rel="noopener">GitHub</a></li>
+        <li class="gh"><a href="https://github.com/typenx/efail" rel="noopener">GitHub</a></li>
       </ul>
     </nav>
   </div>
@@ -354,9 +399,11 @@ end 300</code></pre>
     </div>
 
     <figure style="margin-top:32px">
+      <div class="scrollx">
       <img class="px" src="/img/dodge-film.png" width="1300" height="520" loading="lazy" decoding="async"
            alt="Film strip from efail film: six frames of the Dodge game at ticks 0, 30, 60, 90, 120 and 150. Orange blocks fall toward a green player; the last frame shows GAME OVER with a score of 142.">
-      <figcaption><code>efail film --ticks 150 --every 30</code>: one PNG, six frames, each labelled with its tick. It matches the text output above tick for tick.</figcaption>
+      </div>
+      <figcaption><code>efail film --ticks 150 --every 30</code>: one PNG, six frames, each labelled with its tick. It matches the text output above tick for tick.<span class="swipe"> Swipe sideways to see every frame.</span></figcaption>
     </figure>
   </div>
 </section>
@@ -417,9 +464,15 @@ law over_waits:
   <div class="wrap">
     <h2 id="play-h">Play it here</h2>
     <p class="lede">This is the Dodge example, built with <code>efail web</code>: one HTML file running the game's own functions.
-    Click the game, then use the arrow keys or A/D to move and Space to retry.</p>
+    <span class="keys-hint">Click the game, then use the arrow keys or A/D to move and Space to retry.</span>
+    <span class="touch-hint">Hold the buttons under the game to move, and tap Retry after a game over.</span></p>
     <div class="play">
       <iframe src="/play/dodge.html" title="Dodge, an Efail example game, playable in the browser" loading="lazy"></iframe>
+      <div class="pad" id="pad" role="group" aria-label="Touch controls">
+        <button type="button" data-key="ArrowLeft" aria-label="Move left">&#9664;</button>
+        <button type="button" class="wide" data-key=" " data-code="Space">Retry</button>
+        <button type="button" data-key="ArrowRight" aria-label="Move right">&#9654;</button>
+      </div>
     </div>
     <p style="margin-top:12px"><a href="/play/dodge.html">Open the game on its own page</a></p>
   </div>
@@ -497,5 +550,25 @@ efail3d shot --ticks 120</code></pre></div></li>
     <p>Efail is Welsh for &ldquo;smithy&rdquo;. MIT licensed. &copy; 2026 The Efail authors.</p>
   </div>
 </footer>
+<script>
+// Touch controls for the demo: each button sends the game the same key
+// events a keyboard would. The page's content does not depend on this.
+(function () {
+  var frame = document.querySelector('.play iframe'), pad = document.getElementById('pad');
+  if (!frame || !pad) return;
+  function send(type, b) {
+    var w = frame.contentWindow;
+    if (!w || !w.KeyboardEvent) return;
+    var key = b.getAttribute('data-key');
+    w.dispatchEvent(new w.KeyboardEvent(type, { key: key, code: b.getAttribute('data-code') || key, bubbles: true }));
+  }
+  pad.querySelectorAll('button').forEach(function (b) {
+    function up() { if (b.classList.contains('on')) { b.classList.remove('on'); send('keyup', b); } }
+    b.addEventListener('pointerdown', function (e) { e.preventDefault(); b.classList.add('on'); send('keydown', b); });
+    ['pointerup', 'pointercancel', 'pointerleave'].forEach(function (t) { b.addEventListener(t, up); });
+    b.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+  });
+})();
+</script>
 </body>
 </html>
