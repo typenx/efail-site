@@ -1,0 +1,27 @@
+# Efail
+
+> Efail is a deterministic 2D and low-poly 3D game engine built for AI agents, written in Bend. A game is one file (game.bend) of pure functions: init, step, draw (or scene in 3D) and show. The engine handles the window, clock, input, replays, screenshots and headless runs.
+
+Key facts:
+
+- Everything is checkable as text or PNG: `efail sim` prints the state, `efail shot` and `efail film` save frames.
+- Everything is deterministic: the same seed and input give the same states and the same pixels.
+- `efail check` type-checks the game and proves its laws (facts about the rules, written in Bend).
+- Status: v0, Linux (X11 or XWayland), MIT licensed. 2D games also export to one web page with `efail web`.
+- To write a game, the 2D guide below is the only document you need.
+
+## Docs
+
+- [2D guide (AGENTS.md)](__SITE_URL__/docs/2d.md): the complete 2D contract, API, input-file format and the Bend rules that bite
+- [3D guide (AGENTS3D.md)](__SITE_URL__/docs/3d.md): the complete low-poly 3D API: scenes, cameras, lighting, physics
+- [Landing page as Markdown](__SITE_URL__/index.md): what Efail is, the commands, quick start and FAQ
+
+## Code
+
+- [Source repository](https://github.com/typenx/efail): the engine, templates and example games
+- [Bend language](https://github.com/bendlang/bend): the language Efail and its games are written in
+
+## Optional
+
+- [Everything in one file](__SITE_URL__/llms-full.txt): the landing page plus both guides, concatenated
+- [Playable Dodge example](__SITE_URL__/play/dodge.html): a game built with `efail web` (needs a browser)

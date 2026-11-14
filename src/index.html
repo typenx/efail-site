@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Efail: the deterministic game engine built for AI agents</title>
+<meta name="description" content="Efail is a deterministic 2D and low-poly 3D game engine built for AI coding agents. A game is one file of pure functions; agents run it headless, read the state as text, take PNG screenshots and replay human bugs exactly.">
+<link rel="canonical" href="__SITE_URL__/">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="theme-color" content="#0b1622">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+<!-- For AI agents: this page as Markdown, a site index, and the full docs in one file. -->
+<link rel="alternate" type="text/markdown" href="__SITE_URL__/index.md" title="This page as Markdown">
+<link rel="alternate" type="text/plain" href="__SITE_URL__/llms.txt" title="llms.txt: index for AI agents">
+<link rel="alternate" type="text/plain" href="__SITE_URL__/llms-full.txt" title="llms-full.txt: all Efail docs in one file">
+<link rel="sitemap" type="application/xml" href="__SITE_URL__/sitemap.xml">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Efail">
+<meta property="og:title" content="Efail: the deterministic game engine built for AI agents">
+<meta property="og:description" content="A game is one file of pure functions. Agents run it headless, read the state as text, look at PNG screenshots and replay human bugs exactly. 2D and low-poly 3D.">
+<meta property="og:url" content="__SITE_URL__/">
+<meta property="og:image" content="__SITE_URL__/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Efail: the game engine built for AI agents. Deterministic 2D and low-poly 3D, one file of pure functions. Drawn by the engine itself.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Efail: the deterministic game engine built for AI agents">
+<meta name="twitter:description" content="A game is one file of pure functions. Agents run it headless, read the state as text, look at PNG screenshots and replay human bugs exactly.">
+<meta name="twitter:image" content="__SITE_URL__/img/og.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "__SITE_URL__/#website",
+      "url": "__SITE_URL__/",
+      "name": "Efail",
+      "description": "The deterministic 2D and low-poly 3D game engine built for AI agents.",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "__SITE_URL__/#software",
+      "name": "Efail",
+      "alternateName": "Efail game engine",
+      "url": "__SITE_URL__/",
+      "description": "Efail is a deterministic 2D and low-poly 3D game engine built for AI agents, written in Bend. A game is one file of pure functions. The engine handles the window, clock, input, replays, screenshots and headless runs.",
+      "applicationCategory": "DeveloperApplication",
+      "applicationSubCategory": "Game engine",
+      "operatingSystem": "Linux",
+      "softwareVersion": "0",
+      "programmingLanguage": "Bend",
+      "license": "https://opensource.org/licenses/MIT",
+      "isAccessibleForFree": true,
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "codeRepository": "https://github.com/typenx/efail",
+      "softwareHelp": { "@type": "CreativeWork", "url": "__SITE_URL__/docs/2d.md" },
+      "screenshot": [
+        "__SITE_URL__/img/dodge-film.png",
+        "__SITE_URL__/img/runner3d.png"
+      ],
+      "featureList": [
+        "A game is one file of pure functions: init, step, draw, show",
+        "Headless deterministic simulation with scripted input",
+        "PNG screenshots and film strips written by the engine",
+        "Exact replay of human play sessions",
+        "Rules proven at check time with Bend laws",
+        "Low-poly 3D rendering, cameras and basic physics",
+        "Export to a single self-contained web page",
+        "Retro sound described as data and checked as text"
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "__SITE_URL__/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is Efail?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Efail is a deterministic 2D and low-poly 3D game engine built for AI agents, written in the Bend programming language. A game is one file, game.bend, made of pure functions (init, step, draw and show). Efail handles the window, the clock, input, replays, screenshots and headless runs." }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is Efail a good game engine for AI coding agents?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Agents usually spend most of their effort on the layer around a game: choosing a stack, wiring a renderer and input, and finding a way to see and test what they made. Efail makes those choices up front. Everything an agent needs to check is text or a PNG, every run is deterministic, there is no editor GUI, and the whole 2D API fits in one page of docs (AGENTS.md)." }
+        },
+        {
+          "@type": "Question",
+          "name": "How does an AI agent test an Efail game without a screen?",
+          "acceptedAnswer": { "@type": "Answer", "text": "The agent writes a plain-text input file (a tick number followed by the keys held from that tick), then runs efail sim to print the game state as one line of text per sampled tick, efail shot to save a frame as a PNG, or efail film to save a labelled grid of frames in one PNG. The same seed and input always give the same states and the same pixels." }
+        },
+        {
+          "@type": "Question",
+          "name": "What language are Efail games written in?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Efail games are written in Bend, a Python-shaped, strictly typed functional language. The engine itself is also written in Bend. Game functions are pure: no IO, no clock and no randomness except what is derived from the seed." }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Efail support 3D games?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. The efail3d command provides a low-poly 3D mode with colored triangle rendering, depth, clipping, transformed primitive meshes, flat lighting, cameras, deterministic gravity, box and sphere collision, raycasts, screenshots and exact replay. Textures, imported models, skeletal animation, shadows and rigid-body joints are outside the first 3D release." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can Efail games run in a web browser?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes, for 2D games. efail web writes build/game.html, one self-contained file that runs the game's own functions compiled to JavaScript, with the same 60 ticks a second, keys, pixels and sounds as the native window. Its Save replay button downloads a replay that efail sim can rerun headless." }
+        },
+        {
+          "@type": "Question",
+          "name": "What platforms does Efail run on?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Efail is at v0 and runs on Linux (X11 or XWayland). Headless commands such as efail sim and efail shot need no display. 2D games can also be exported to a single web page that runs in any modern browser." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Efail free and open source?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Efail is free and released under the MIT license." }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you pronounce Efail and what does it mean?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Efail is Welsh for smithy and is said EV-ile." }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+:root {
+  --bg: #0b1622; --panel: #111f30; --panel-2: #0e1a29; --line: #223449;
+  --text: #e6edf3; --muted: #9bacc0; --ember: #f08a24; --ember-2: #ffb35c;
+  --green: #2ecc71; --red: #e74c3c;
+  --mono: ui-monospace, "SF Mono", "Cascadia Code", "JetBrains Mono", Menlo, Consolas, monospace;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 17px/1.65 var(--sans); }
+a { color: var(--ember-2); text-underline-offset: 3px; }
+a:hover { color: #fff; }
+:focus-visible { outline: 2px solid var(--ember); outline-offset: 3px; border-radius: 2px; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+.skip { position: absolute; left: -999px; }
+.skip:focus { left: 12px; top: 12px; background: var(--ember); color: #000; padding: 8px 12px; z-index: 9; }
+
+header.top { border-bottom: 1px solid var(--line); }
+header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 60px; flex-wrap: wrap; }
+.brand { display: flex; align-items: center; gap: 10px; font: 700 20px var(--mono); color: var(--text); text-decoration: none; letter-spacing: .04em; }
+.brand svg { display: block; }
+nav ul { display: flex; gap: 22px; list-style: none; margin: 0; padding: 0; flex-wrap: wrap; }
+nav a { color: var(--muted); text-decoration: none; font-size: 15px; }
+nav a:hover { color: var(--text); }
+
+h1, h2, h3 { font-family: var(--mono); line-height: 1.2; letter-spacing: -.01em; margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(34px, 6vw, 58px); }
+h1 em { font-style: normal; color: var(--ember); }
+h2 { font-size: clamp(26px, 3.6vw, 36px); margin-bottom: 14px; }
+h3 { font-size: 18px; margin-bottom: 6px; }
+p { margin: 0 0 16px; }
+.lede { font-size: clamp(18px, 2.2vw, 21px); color: var(--muted); max-width: 46em; }
+.lede strong { color: var(--text); font-weight: 600; }
+.kicker { font: 600 13px var(--mono); color: var(--ember); text-transform: uppercase; letter-spacing: .14em; margin-bottom: 14px; }
+
+.hero { padding: 72px 0 56px; }
+.hero h1 { max-width: 15em; margin-bottom: 22px; }
+.cta { display: flex; gap: 12px; flex-wrap: wrap; margin: 28px 0 0; }
+.btn { display: inline-block; padding: 12px 20px; font: 600 15px var(--mono); text-decoration: none; border: 2px solid var(--ember); color: var(--ember-2); }
+.btn.primary { background: var(--ember); color: #14100a; }
+.btn:hover { background: var(--ember-2); border-color: var(--ember-2); color: #14100a; }
+
+.agent-note { margin-top: 36px; border: 1px dashed var(--line); background: var(--panel-2); padding: 14px 18px; font: 14px/1.6 var(--mono); color: var(--muted); }
+.agent-note strong { color: var(--green); }
+
+section { padding: 64px 0; border-top: 1px solid var(--line); }
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; align-items: start; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-top: 28px; padding: 0; list-style: none; }
+.cards li { background: var(--panel); border: 1px solid var(--line); padding: 20px; }
+.cards p { color: var(--muted); margin: 0; font-size: 15.5px; }
+.cards h3 { color: var(--ember-2); }
+
+pre { margin: 0; background: #07101a; border: 1px solid var(--line); padding: 16px 18px; overflow-x: auto; font: 14px/1.6 var(--mono); color: #d5dee8; tab-size: 2; }
+code { font-family: var(--mono); font-size: .92em; }
+p code, li code, dd code, td code { background: var(--panel); border: 1px solid var(--line); padding: 1px 5px; }
+pre .c { color: #6f8399; }
+pre .o { color: var(--green); }
+figure { margin: 0; }
+figcaption { color: var(--muted); font-size: 14px; margin-top: 8px; }
+.px { image-rendering: pixelated; image-rendering: crisp-edges; display: block; width: 100%; height: auto; border: 1px solid var(--line); background: #0f1e2e; }
+.shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 24px; }
+
+table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 15.5px; }
+th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font: 600 13px var(--mono); color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+td:first-child { white-space: nowrap; }
+.tablewrap { overflow-x: auto; }
+
+.play { margin-top: 24px; border: 1px solid var(--line); background: #07101a; }
+.play iframe { display: block; width: 100%; height: 620px; border: 0; }
+
+.steps { counter-reset: s; list-style: none; padding: 0; margin: 24px 0 0; display: grid; gap: 14px; }
+.steps li { counter-increment: s; display: grid; grid-template-columns: 44px 1fr; gap: 14px; align-items: start; }
+.steps li::before { content: counter(s); font: 700 18px var(--mono); color: #14100a; background: var(--ember); width: 36px; height: 36px; display: grid; place-items: center; }
+.steps p { margin: 0 0 8px; }
+
+dl.faq { margin: 24px 0 0; }
+dl.faq dt { font: 600 18px var(--mono); margin-top: 26px; color: var(--text); }
+dl.faq dd { margin: 8px 0 0; color: var(--muted); max-width: 52em; }
+
+footer { border-top: 1px solid var(--line); padding: 36px 0 56px; color: var(--muted); font-size: 15px; }
+footer ul { list-style: none; padding: 0; margin: 0 0 16px; display: flex; gap: 20px; flex-wrap: wrap; }
+@media (max-width: 700px) { .play iframe { height: 420px; } }
+@media (max-width: 560px) { .hero { padding: 44px 0 36px; } section { padding: 44px 0; } nav ul { gap: 14px; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Efail home">
+      <svg width="26" height="26" viewBox="0 0 16 16" aria-hidden="true" shape-rendering="crispEdges"><path fill="#f08a24" d="M1 3h11v3h3v2h-4v2h-1v2h2v2H3v-2h2v-2H4V8H1z"/><path fill="#ffb35c" d="M2 4h9v1H2z"/></svg>
+      EFAIL
+    </a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#loop">The agent loop</a></li>
+        <li><a href="#play">Play</a></li>
+        <li><a href="#quickstart">Quick start</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="/docs/2d.md">Docs</a></li>
+        <li><a href="https://github.com/typenx/efail" rel="noopener">GitHub</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<div class="hero wrap">
+  <p class="kicker">Deterministic 2D + low-poly 3D &middot; written in Bend &middot; MIT</p>
+  <h1>The game engine built for <em>AI agents</em></h1>
+  <p class="lede"><strong>Efail is a deterministic 2D and low-poly 3D game engine built for AI agents.</strong>
+  A game is one file of pure functions. The engine owns the window, the clock, input, replays and screenshots,
+  so an agent only writes the game, then checks it headless: state as text, frames as PNGs, the same result on every run.</p>
+  <div class="cta">
+    <a class="btn primary" href="#quickstart">Quick start</a>
+    <a class="btn" href="/docs/2d.md">Read the docs (one page)</a>
+    <a class="btn" href="#play">Play the demo</a>
+  </div>
+  <p class="agent-note"><strong>Reading this as an AI agent?</strong> Skip the HTML.
+  <a href="/llms.txt">/llms.txt</a> is the index,
+  <a href="/index.md">/index.md</a> is this page as Markdown, and
+  <a href="/llms-full.txt">/llms-full.txt</a> is the complete 2D and 3D documentation in one file.
+  Requesting <code>/</code> with <code>Accept: text/markdown</code> returns Markdown too.</p>
+</div>
+
+<section id="why" aria-labelledby="why-h">
+  <div class="wrap">
+    <h2 id="why-h">Why an engine for agents?</h2>
+    <p class="lede">Agents making games today spend most of their effort on the layer around the game: choosing a stack,
+    wiring a renderer and input, building ways to see and test what they made, and fighting an editor GUI.
+    Efail makes all of those choices up front, so the agent only writes the game.</p>
+    <ul class="cards">
+      <li><h3>One file of pure functions</h3><p>A game is <code>game.bend</code>: <code>init</code>, <code>step</code>, <code>draw</code> and <code>show</code>. No game loop, no renderer, no input handling.</p></li>
+      <li><h3>Headless and deterministic</h3><p><code>efail sim</code> runs any number of ticks with scripted keys in milliseconds and prints the state. The same seed and keys always give the same result.</p></li>
+      <li><h3>Agents can see the game</h3><p><code>efail shot</code> saves any frame as a PNG. <code>efail film</code> puts a whole animation in one labelled grid. The engine writes the pixels itself.</p></li>
+      <li><h3>Human bugs replay exactly</h3><p><code>efail run</code> records what the player did. <code>efail replay</code> reruns it headless, tick for tick.</p></li>
+      <li><h3>Proven rules</h3><p>Through Bend's laws, a game states facts like &ldquo;game over waits for Space&rdquo; and <code>efail check</code> proves them for every input.</p></li>
+      <li><h3>One page of docs per mode</h3><p><a href="/docs/2d.md">AGENTS.md</a> covers 2D and <a href="/docs/3d.md">AGENTS3D.md</a> covers 3D. Each fits in a single context window.</p></li>
+    </ul>
+  </div>
+</section>
+
+<section id="how" aria-labelledby="how-h">
+  <div class="wrap">
+    <h2 id="how-h">How it works: the whole contract</h2>
+    <div class="cols">
+      <div>
+        <p>Your game defines a state type and four pure functions. Efail calls <code>step</code> 60 times a second,
+        draws whatever <code>draw</code> returns, and prints <code>show</code> when running headless.</p>
+        <p>There is no IO, no clock and no randomness except what you derive from the seed.
+        That is what makes every run reproducible, and what lets an agent trust a text line as much as a screenshot.</p>
+        <p>The API is small: rectangles, circles, text and text-art sprites; keyboard and mouse; seeded random;
+        collision helpers; and retro sounds described as data, which <code>efail sim</code> prints on the tick they start.</p>
+      </div>
+      <figure>
+<pre><code>import Base
+import ./efail/efail.bend as E
+
+type State is Data:               <span class="c"># your state</span>
+  ...
+
+def init(seed: U32) -&gt; State:                  <span class="c"># the first state</span>
+def step(+input: E.Input, s: State) -&gt; State:  <span class="c"># one tick; 60 a second</span>
+def draw(s: State) -&gt; List&lt;E.Shape&gt;:           <span class="c"># what to show</span>
+def show(s: State) -&gt; String:                  <span class="c"># one line for efail sim</span></code></pre>
+        <figcaption>The contract every Efail 2D game implements. A 3D game returns a scene from <code>scene</code> instead of shapes from <code>draw</code>.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section id="loop" aria-labelledby="loop-h">
+  <div class="wrap">
+    <h2 id="loop-h">The loop an agent works in</h2>
+    <p class="lede">Edit, check, simulate, look. Every command is a one-liner whose output is text or a PNG.</p>
+    <div class="tablewrap">
+    <table>
+      <thead><tr><th scope="col">Command</th><th scope="col">What it does</th><th scope="col">Output an agent reads</th></tr></thead>
+      <tbody>
+        <tr><td><code>efail check</code></td><td>Type-checks the game, checks the contract and proves its laws</td><td>Errors as text</td></tr>
+        <tr><td><code>efail sim</code></td><td>Runs headless with scripted input</td><td>One <code>show(state)</code> line per sampled tick, plus each sound</td></tr>
+        <tr><td><code>efail shot</code></td><td>Runs, then saves one frame</td><td><code>build/shot.png</code></td></tr>
+        <tr><td><code>efail film</code></td><td>Saves frames every N ticks in one image</td><td><code>build/film.png</code>, each frame labelled with its tick</td></tr>
+        <tr><td><code>efail run</code></td><td>A human plays in a window</td><td><code>build/last.replay</code></td></tr>
+        <tr><td><code>efail replay</code></td><td>Reruns exactly what the human just did, headless</td><td>The same state lines the human produced</td></tr>
+        <tr><td><code>efail web</code></td><td>Builds the game as one self-contained web page</td><td><code>build/game.html</code></td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="cols" style="margin-top:32px">
+      <figure>
+<pre><code>$ efail sim --ticks 300 --every 60
+<span class="o">tick 0: play x=150 blocks=0 score=0
+tick 60: play x=150 blocks=2 score=60
+tick 120: play x=150 blocks=4 score=120
+tick 141: sound slide 440&gt;60 400ms square
+tick 141: sound beep 90 250ms noise
+tick 180: over score=142 best=142
+tick 240: over score=142 best=142
+tick 300: over score=142 best=142</span></code></pre>
+        <figcaption>Real output from the Dodge example with no keys pressed: the player is hit at tick 141 and the game-over sounds start on that tick.</figcaption>
+      </figure>
+      <figure>
+<pre><code><span class="c"># keys.txt: a tick, then the keys held from that tick on</span>
+seed 42
+0
+30 right
+90 right space
+120
+150 @100,60      <span class="c"># move the mouse pointer</span>
+160 mouse_left   <span class="c"># click</span>
+end 300</code></pre>
+        <figcaption>Input scripts and recorded replays share one plain-text format, so an agent can write, read and edit them.</figcaption>
+      </figure>
+    </div>
+
+    <figure style="margin-top:32px">
+      <img class="px" src="/img/dodge-film.png" width="1300" height="520" loading="lazy" decoding="async"
+           alt="Film strip from efail film: six frames of the Dodge game at ticks 0, 30, 60, 90, 120 and 150. Orange blocks fall toward a green player; the last frame shows GAME OVER with a score of 142.">
+      <figcaption><code>efail film --ticks 150 --every 30</code>: one PNG, six frames, each labelled with its tick. It matches the text output above tick for tick.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="laws" aria-labelledby="laws-h">
+  <div class="wrap">
+    <h2 id="laws-h">Rules you can prove, not just test</h2>
+    <div class="cols">
+      <div>
+        <p>Because a game is pure functions in Bend, it can state facts about its own rules as <strong>laws</strong>,
+        and <code>efail check</code> proves them for every possible input, not only the ones a test happened to try.</p>
+        <p>The Dodge example proves that its game-over screen stays exactly as it is until Space goes down,
+        and that Space starts a fresh round that keeps the best score.</p>
+      </div>
+      <figure>
+<pre><code><span class="c"># LAW: the game-over screen waits for Space.</span>
+law over_waits:
+  for +input: E.Input
+  for score: U32
+  for seed: U32
+  for best: U32
+  {E.pressed(input, E.space()) == False{} : Bool} -&gt;
+    {Game.step(input, Game.Over{score, seed, best})
+      == Game.Over{score, seed, best} : Game.State}</code></pre>
+        <figcaption>From <code>examples/dodge/LAWS.bend</code>.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section id="modes" aria-labelledby="modes-h">
+  <div class="wrap">
+    <h2 id="modes-h">2D and low-poly 3D</h2>
+    <div class="cols">
+      <div>
+        <h3>Efail 2D</h3>
+        <p>Rectangles, circles, a built-in pixel font and sprites written as text, one character per pixel.
+        Keyboard and mouse input, seeded random, collision helpers, retro sound, and export to a single web page.</p>
+        <p><a href="/docs/2d.md">2D guide (AGENTS.md)</a></p>
+      </div>
+      <div>
+        <h3>Efail 3D</h3>
+        <p>Colored triangle rendering with depth and clipping, transformed primitive meshes, flat lighting, cameras,
+        deterministic gravity, box and sphere collision, raycasts, screenshots and exact replay, through the <code>efail3d</code> command.</p>
+        <p><a href="/docs/3d.md">3D guide (AGENTS3D.md)</a></p>
+      </div>
+    </div>
+    <div class="shots">
+      <figure><img class="px" src="/img/dodge.png" width="320" height="240" loading="lazy" decoding="async" alt="Dodge, an Efail 2D example game: orange blocks fall toward a green paddle on a navy background, score 130."><figcaption>Dodge: a complete game with proven laws</figcaption></figure>
+      <figure><img class="px" src="/img/sprites.png" width="320" height="240" loading="lazy" decoding="async" alt="Efail sprites example: a pixel-art character, trees and a purple gem on a green field, drawn from text sprites."><figcaption>Sprites written as text</figcaption></figure>
+      <figure><img class="px" src="/img/pop.png" width="320" height="240" loading="lazy" decoding="async" alt="Pop, an Efail mouse example: a red target on a navy background with hit and miss counters."><figcaption>Pop: mouse input</figcaption></figure>
+      <figure><img class="px" src="/img/runner3d.png" width="320" height="180" loading="lazy" decoding="async" alt="Runner3D, an Efail 3D example: a green low-poly runner in a corridor with blue walls, rendered with flat lighting."><figcaption>Runner3D: low-poly 3D</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="play" aria-labelledby="play-h">
+  <div class="wrap">
+    <h2 id="play-h">Play it here</h2>
+    <p class="lede">This is the Dodge example, built with <code>efail web</code>: one HTML file running the game's own functions.
+    Click the game, then use the arrow keys or A/D to move and Space to retry.</p>
+    <div class="play">
+      <iframe src="/play/dodge.html" title="Dodge, an Efail example game, playable in the browser" loading="lazy"></iframe>
+    </div>
+    <p style="margin-top:12px"><a href="/play/dodge.html">Open the game on its own page</a></p>
+  </div>
+</section>
+
+<section id="quickstart" aria-labelledby="qs-h">
+  <div class="wrap">
+    <h2 id="qs-h">Quick start</h2>
+    <p class="lede">Efail is at v0 and runs on Linux (X11 or XWayland). It needs Bend 2 and clang.</p>
+    <ol class="steps">
+      <li><div><p>Install Bend, then get Efail and put it on your path.</p>
+<pre><code>curl -fsSL https://bend-lang.com/install.sh | sh
+git clone https://github.com/typenx/efail &amp;&amp; cd efail
+export PATH="$PWD/bin:$PATH"</code></pre></div></li>
+      <li><div><p>Create a game and check it headless.</p>
+<pre><code>efail new mygame &amp;&amp; cd mygame
+efail check
+efail sim --ticks 300 --every 60     <span class="c"># state as text</span>
+efail shot --ticks 120               <span class="c"># build/shot.png</span></code></pre></div></li>
+      <li><div><p>Point your agent at <code>AGENTS.md</code> in the game folder and tell it what to build. Play the result with <code>efail run</code> (Esc quits).</p></div></li>
+      <li><div><p>For 3D, use <code>efail3d</code> the same way.</p>
+<pre><code>efail3d new my3dgame &amp;&amp; cd my3dgame
+efail3d check
+efail3d shot --ticks 120</code></pre></div></li>
+    </ol>
+  </div>
+</section>
+
+<section id="faq" aria-labelledby="faq-h">
+  <div class="wrap">
+    <h2 id="faq-h">Frequently asked questions</h2>
+    <dl class="faq">
+      <dt>What is Efail?</dt>
+      <dd>Efail is a deterministic 2D and low-poly 3D game engine built for AI agents, written in the Bend programming language. A game is one file, <code>game.bend</code>, made of pure functions (<code>init</code>, <code>step</code>, <code>draw</code> and <code>show</code>). Efail handles the window, the clock, input, replays, screenshots and headless runs.</dd>
+
+      <dt>Why is Efail a good game engine for AI coding agents?</dt>
+      <dd>Agents usually spend most of their effort on the layer around a game: choosing a stack, wiring a renderer and input, and finding a way to see and test what they made. Efail makes those choices up front. Everything an agent needs to check is text or a PNG, every run is deterministic, there is no editor GUI, and the whole 2D API fits in one page of docs (<a href="/docs/2d.md">AGENTS.md</a>).</dd>
+
+      <dt>How does an AI agent test an Efail game without a screen?</dt>
+      <dd>The agent writes a plain-text input file (a tick number followed by the keys held from that tick), then runs <code>efail sim</code> to print the game state as one line of text per sampled tick, <code>efail shot</code> to save a frame as a PNG, or <code>efail film</code> to save a labelled grid of frames in one PNG. The same seed and input always give the same states and the same pixels.</dd>
+
+      <dt>What language are Efail games written in?</dt>
+      <dd>Efail games are written in <a href="https://github.com/bendlang/bend" rel="noopener">Bend</a>, a Python-shaped, strictly typed functional language. The engine itself is also written in Bend. Game functions are pure: no IO, no clock and no randomness except what is derived from the seed.</dd>
+
+      <dt>Does Efail support 3D games?</dt>
+      <dd>Yes. The <code>efail3d</code> command provides a low-poly 3D mode with colored triangle rendering, depth, clipping, transformed primitive meshes, flat lighting, cameras, deterministic gravity, box and sphere collision, raycasts, screenshots and exact replay. Textures, imported models, skeletal animation, shadows and rigid-body joints are outside the first 3D release.</dd>
+
+      <dt>Can Efail games run in a web browser?</dt>
+      <dd>Yes, for 2D games. <code>efail web</code> writes <code>build/game.html</code>, one self-contained file that runs the game's own functions compiled to JavaScript, with the same 60 ticks a second, keys, pixels and sounds as the native window. Its Save replay button downloads a replay that <code>efail sim</code> can rerun headless.</dd>
+
+      <dt>What platforms does Efail run on?</dt>
+      <dd>Efail is at v0 and runs on Linux (X11 or XWayland). Headless commands such as <code>efail sim</code> and <code>efail shot</code> need no display. 2D games can also be exported to a single web page that runs in any modern browser.</dd>
+
+      <dt>Is Efail free and open source?</dt>
+      <dd>Yes. Efail is free and released under the MIT license.</dd>
+
+      <dt>How do you pronounce Efail and what does it mean?</dt>
+      <dd>Efail is Welsh for &ldquo;smithy&rdquo; and is said EV-ile.</dd>
+    </dl>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <ul>
+      <li><a href="/docs/2d.md">2D docs</a></li>
+      <li><a href="/docs/3d.md">3D docs</a></li>
+      <li><a href="/llms.txt">llms.txt</a></li>
+      <li><a href="/llms-full.txt">llms-full.txt</a></li>
+      <li><a href="/index.md">This page as Markdown</a></li>
+      <li><a href="https://github.com/typenx/efail" rel="noopener">GitHub</a></li>
+    </ul>
+    <p>Efail is Welsh for &ldquo;smithy&rdquo;. MIT licensed. &copy; 2026 The Efail authors.</p>
+  </div>
+</footer>
+</body>
+</html>
