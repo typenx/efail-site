@@ -38,6 +38,8 @@ src/docs/3d.md      a copy of the engine's AGENTS3D.md
 src/play/dodge.html the Dodge example, built with `efail web`
 src/img/            screenshots made by `efail shot` and `efail film`
 src/robots.txt      allows search and AI crawlers, points to the sitemap
+src/<32 hex>.txt    the IndexNow key, which proves the site is ours when we tell
+                    Bing and others that pages changed (see below)
 build.mjs           fills in the site URL; writes llms-full.txt and sitemap.xml
 server.mjs          serves dist/: headers, gzip, and Markdown for
                     `Accept: text/markdown` on /
@@ -90,3 +92,19 @@ Screenshots come from `efail shot` and `efail film` in `examples/`. The engine
 writes uncompressed PNGs, so shrink each with
 `node tools/repng.mjs in.png out.png`. The share image `src/img/og.png` is
 `tools/og-card/game.bend` run with `efail shot --ticks 1`.
+
+## Telling search engines about changes
+
+[IndexNow](https://www.indexnow.org) notifies Bing, Yandex, Seznam and Naver
+that pages changed. After a deploy that changes content:
+
+```sh
+KEY=$(basename src/????????????????????????????????.txt .txt)
+HOST=efail-site-production.up.railway.app
+curl -s -o /dev/null -w '%{http_code}\n' https://api.indexnow.org/indexnow \
+  -H 'Content-Type: application/json; charset=utf-8' \
+  -d "{\"host\":\"$HOST\",\"key\":\"$KEY\",\"urlList\":[\"https://$HOST/\",\"https://$HOST/docs/2d.md\",\"https://$HOST/docs/3d.md\"]}"
+```
+
+200 or 202 means it was accepted. Google does not use IndexNow: add the site
+in Google Search Console and submit `/sitemap.xml` there.
